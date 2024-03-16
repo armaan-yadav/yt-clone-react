@@ -14,9 +14,9 @@ const options = {
 };
 
 export async function setVideos(searchValue) {
-  // const data = await fetch(`${fetch_url}/&q=${searchValue}`, options);
-  // const json = await data.json();
-  // return  json;
+  const data = await fetch(`${fetch_url}/&q=${searchValue}`, options);
+  const json = await data.json();
+  return  json;
 }
 
 export async function getVideoDetails(videoId) {

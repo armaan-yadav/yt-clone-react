@@ -6,7 +6,6 @@ import Categories from "../categories/Categories";
 
 const VideoContainer = () => {
   const { searchResults, isLoading } = useContext(Context);
-  console.log(isLoading);
 
   return isLoading ? (
     <div className="h-[calc(100vh-56px)] bg-black w-full text-white grid grid-cols-1  lg:grid-cols-3 md:grid-cols-2 relative">
