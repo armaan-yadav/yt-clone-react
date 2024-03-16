@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Context } from "../context/contextApi";
-import { getVideos } from "../utils/api";
+import { Context } from "../../context/contextApi";
+import { setVideos } from "../../utils/api";
 const Navbar = () => {
   const [searchValue, setSearchValue] = useState("");
   const [showInput, setShowInput] = useState(false);

@@ -31,3 +31,24 @@ export const leftSidebarFullData = [
     name: "LifeStyle",
   },
 ];
+
+export const categories = [
+  "New",
+  "JavaScript",
+  "HTML",
+  "CSS",
+  "Tailwind",
+  "React JS",
+  "TypeScript",
+  "Podcasts",
+  "Gadgets",
+  "Rust",
+  "Next JS",
+  "Node Js",
+  "Express Js",
+  "Bootstrap",
+  "Shad CN",
+  "Material UI",
+  ""
+
+];

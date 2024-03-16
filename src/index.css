@@ -5,9 +5,9 @@
 .gradient-background {
   background: linear-gradient(
     270deg,
-    rgb(161, 161, 161),
-    #717171,
-    rgb(157, 157, 157)
+    rgba(139, 139, 139, 0.508),
+    #525252,
+    rgba(137, 137, 137, 0.508)
   );
   background-size: 180% 180%;
   animation: gradient-animation 1.5s ease infinite;

@@ -1,17 +1,20 @@
 import { createContext, useEffect, useState } from "react";
-import { getVideos } from "../utils/api";
+import { setVideos } from "../utils/api";
 
 export const Context = createContext();
 
 export const AppContext = (props) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [category, setCategory] = useState("New");
   const [shoeSideMenu, setShowSideMenu] = useState(false);
   useEffect(() => {
     setIsLoading(true);
-    getVideos(category).then((response) => setSearchResults(response.contents));
-    setIsLoading(false);
+    setVideos(category)
+      .then((response) => setSearchResults(response.contents))
+      .then(() => {
+        setIsLoading(false);
+      });
   }, [category]);
 
   return (
