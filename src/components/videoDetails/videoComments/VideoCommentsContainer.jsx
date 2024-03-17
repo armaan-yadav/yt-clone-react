@@ -11,38 +11,38 @@ export const VideoCommentsContainer = ({ videoId }) => {
   const [commentsList, setCommentsList] = useState([]);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   getVideoComments(videoId).then((e) => {
-  //     setVideoCommentsObj(e);
-  //     setCursorNext(e.cursorNext);
-  //     setCommentsList(e.comments);
-  //   });
-  //   setIsLoading(false);
-  // }, []);
+  useEffect(() => {
+    setIsLoading(true);
+    getVideoComments(videoId).then((e) => {
+      setVideoCommentsObj(e);
+      setCursorNext(e.cursorNext);
+      setCommentsList(e.comments);
+    });
+    setIsLoading(false);
+  }, []);
 
-  // useEffect(() => {
-  //   const handleScroll = async () => {
-  //     if (
-  //       window.innerHeight + document.documentElement.scrollTop >=
-  //         document.documentElement.offsetHeight - 1 &&
-  //       !isLoadingMore
-  //     ) {
-  //       setIsLoadingMore(true);
+  useEffect(() => {
+    const handleScroll = async () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+          document.documentElement.offsetHeight - 1 &&
+        !isLoadingMore
+      ) {
+        setIsLoadingMore(true);
 
-  //       await getVideoComments(id, cursorNext).then((e) => {
-  //         setVideoCommentsObj(e);
-  //         setCursorNext(e.cursorNext);
-  //         setCommentsList((prev) => [...prev, ...e.comments]);
-  //       });
-  //       setIsLoadingMore(false);
-  //     }
-  //   };
-  //   document.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     document.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, [isLoadingMore, cursorNext]);
+        await getVideoComments(id, cursorNext).then((e) => {
+          setVideoCommentsObj(e);
+          setCursorNext(e.cursorNext);
+          setCommentsList((prev) => [...prev, ...e.comments]);
+        });
+        setIsLoadingMore(false);
+      }
+    };
+    document.addEventListener("scroll", handleScroll);
+    return () => {
+      document.removeEventListener("scroll", handleScroll);
+    };
+  }, [isLoadingMore, cursorNext]);
 
   return commentsList.length === 0 && isLoading ? (
     <div>loadingggg</div>
