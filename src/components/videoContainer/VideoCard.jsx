@@ -34,7 +34,6 @@ const VideoCard = ({ video }) => {
                 ? `${video.title?.toString().slice(0, 60)}...`
                 : video?.title}
             </h1>
-
             <h4 className="text-sm text-gray-500 font-semibold">
               {video?.author?.title}
             </h4>
