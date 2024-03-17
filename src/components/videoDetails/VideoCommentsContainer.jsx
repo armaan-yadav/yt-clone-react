@@ -1,45 +1,63 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { getVideoComments } from "../../utils/api";
 import VideoComment from "./VideoComment";
+import { Context } from "../../context/contextApi";
+import { useParams } from "react-router-dom";
+export const VideoCommentsContainer = ({ videoId }) => {
+  const { id } = useParams();
+  const { isLoading, setIsLoading } = useContext(Context);
+  const [videoCommentsObj, setVideoCommentsObj] = useState({});
+  const [cursorNext, setCursorNext] = useState("");
+  const [commentsList, setCommentsList] = useState([]);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-const VideoCommentsContainer = ({ videoId }) => {
-  const [videoComments, setVideoComments] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isEndReached, setIsEndReached] = useState(false);
-  const divRef = useRef();
   useEffect(() => {
+    setIsLoading(true);
     getVideoComments(videoId).then((e) => {
-      setVideoComments(e);
+      setVideoCommentsObj(e);
+      setCursorNext(e.cursorNext);
+      setCommentsList(e.comments);
     });
+    setIsLoading(false);
   }, []);
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     console.log("first");
-  //     if (
-  //       divRef.current.scrollTop + divRef.current.clientHeight >=
-  //         divRef.current.scrollHeight &&
-  //       !isLoading &&
-  //       !isEndReached
-  //     ) {
-  //       console.log("first"); // Fetch more data when the bottom is reached
-  //     }
-  //   };
-  //   divRef.current.addEventListener("scroll", handleScroll);
 
-  //   return () => {
-  //     divRef.current.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, [isLoading, isEndReached]);
-  return videoComments.error ? (
+  useEffect(() => {
+    const handleScroll = async () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+          document.documentElement.offsetHeight - 1 &&
+        !isLoadingMore
+      ) {
+        setIsLoadingMore(true);
+
+        await getVideoComments(id, cursorNext).then((e) => {
+          setVideoCommentsObj(e);
+          setCursorNext(e.cursorNext);
+          setCommentsList((prev) => [...prev, ...e.comments]);
+        });
+        setIsLoadingMore(false);
+      }
+    };
+    document.addEventListener("scroll", handleScroll);
+    return () => {
+      document.removeEventListener("scroll", handleScroll);
+    };
+  }, [isLoadingMore, cursorNext]);
+
+  return commentsList.length === 0 && isLoading ? (
+    <div>loadingggg</div>
+  ) : videoCommentsObj.error ? (
     <div>comments are turned off</div>
   ) : (
-    <div className="w-full my-3 overflow-auto" ref={divRef}>
+    <div className="w-full my-3 overflow-auto">
       <h1 className="text-xl font-semibold">
-        {videoComments?.totalCommentsCount} comments
+        {videoCommentsObj?.totalCommentsCount} comments
       </h1>
-      {videoComments?.comments?.map((e) => (
-        <VideoComment comment={e} key={e.commentId} />
-      ))}
+      {commentsList?.map(
+        (e, index) =>
+          e.content !== null && <VideoComment comment={e} key={index} />
+      )}
+      {isLoadingMore && <div className="bg-red-400">loadingggg more</div>}
     </div>
   );
 };

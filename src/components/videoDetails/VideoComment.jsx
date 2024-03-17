@@ -1,10 +1,12 @@
 import React from "react";
 
-const VideoComment = ({ comment }) => {
-  return (
+export const VideoComment = ({ comment }) => {
+  return !comment.author ? (
+    <></>
+  ) : (
     <div className="flex  my-3 gap-3">
       <img
-        src={comment.author.avatar?.[0].url}
+        src={comment.author?.avatar?.[0]?.url}
         alt=""
         className="h-[40px] rounded-full w-[40px]"
       />

@@ -6,7 +6,7 @@ const VideoCard = ({ video }) => {
 
   return (
     <div className=" h-[300px]  w-full sm:w-[370px] text-white">
-      <Link to={`/video/${video.videoId}`}>
+      <Link to={`/video/${video?.videoId}`}>
         <div className="h-[60%] mb-2">
           <img
             src={`${
