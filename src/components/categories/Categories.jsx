@@ -19,6 +19,7 @@ const Categories = () => {
           onClick={() => {
             setIsLoading(true);
             setCategory(item);
+            console.log(item);
           }}
         >
           {item}

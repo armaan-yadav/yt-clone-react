@@ -6,7 +6,6 @@ import VideoPlayer from "./VideoPlayer";
 import VideoDescription from "./VideoDescription";
 import VideoAuthor from "./VideoAuthor";
 import VideoComments from "./videoComments/VideoCommentsContainer";
-import VideoSuggestions from "./videoSuggestions/VideoSuggestionsContainer";
 import VideoSuggestionsContainer from "./videoSuggestions/VideoSuggestionsContainer";
 
 const VideoDetails = () => {
@@ -16,6 +15,7 @@ const VideoDetails = () => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [videoDetails, setVideoDetails] = useState();
   const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     setIsLoading(true);
     getVideoDetails(id).then((response) => {
@@ -31,8 +31,8 @@ const VideoDetails = () => {
   return !videoDetails ? (
     <div>loading</div>
   ) : (
-    <div className="w-full bg-black text-white px-10 pt-7 flex ">
-      <div className="main-video  w-[65%] h-full">
+    <div className="w-full bg-black text-white px-10 pt-7 flex gap-6">
+      <div className="main-video  min-w-[65%] h-full">
         <VideoPlayer videoId={videoDetails.videoId} isPLaying={isPlaying} />
         <h1 className="text-xl font-bold my-2">{videoDetails.title}</h1>
         <div>
