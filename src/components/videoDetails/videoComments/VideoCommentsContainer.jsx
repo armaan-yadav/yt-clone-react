@@ -3,6 +3,7 @@ import { getVideoComments } from "../../../utils/api";
 import VideoComment from "./VideoComment";
 import { Context } from "../../../context/contextApi";
 import { useParams } from "react-router-dom";
+import loading from "../../../../public/assets/loading.svg";
 export const VideoCommentsContainer = ({ videoId }) => {
   const { id } = useParams();
   const { isLoading, setIsLoading } = useContext(Context);
@@ -19,7 +20,7 @@ export const VideoCommentsContainer = ({ videoId }) => {
       setCommentsList(e.comments);
     });
     setIsLoading(false);
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const handleScroll = async () => {
@@ -29,7 +30,6 @@ export const VideoCommentsContainer = ({ videoId }) => {
         !isLoadingMore
       ) {
         setIsLoadingMore(true);
-
         await getVideoComments(id, cursorNext).then((e) => {
           setVideoCommentsObj(e);
           setCursorNext(e.cursorNext);
@@ -45,7 +45,9 @@ export const VideoCommentsContainer = ({ videoId }) => {
   }, [isLoadingMore, cursorNext]);
 
   return commentsList.length === 0 && isLoading ? (
-    <div>loadingggg</div>
+    <div className="w-full flex  justify-center ">
+      <img src={loading} alt="" className="h-[50px]" />
+    </div>
   ) : videoCommentsObj.error ? (
     <div>comments are turned off</div>
   ) : (
@@ -57,7 +59,11 @@ export const VideoCommentsContainer = ({ videoId }) => {
         (e, index) =>
           e.content !== null && <VideoComment comment={e} key={index} />
       )}
-      {isLoadingMore && <div className="bg-red-400">loadingggg more</div>}
+      {isLoadingMore && (
+        <div className="w-full flex  justify-center ">
+          <img src={loading} alt="" className="h-[50px]" />
+        </div>
+      )}
     </div>
   );
 };

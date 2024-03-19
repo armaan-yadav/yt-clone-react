@@ -10,6 +10,7 @@ export const AppContext = (props) => {
   const [shoeSideMenu, setShowSideMenu] = useState(false);
   useEffect(() => {
     setIsLoading(true);
+
     setVideos(category)
       .then((response) => setSearchResults(response.contents))
       .then(() => {

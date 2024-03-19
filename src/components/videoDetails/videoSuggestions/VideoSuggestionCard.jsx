@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { convertViews } from "../../../utils/temp";
+import { Context } from "../../../context/contextApi";
 const VideoSuggestionCard = ({ video }) => {
+  const { setLoading } = useContext(Context);
   return (
     <div className=" h-[95px]  w-full sm:w-[370px] text-white ">
-      <Link to={`/video/${video?.videoId}`} className="flex">
+      <Link
+        to={`/video/${video?.videoId}`}
+        className="flex"
+        onClick={() => {
+          setLoading(true);
+        }}
+      >
         <div className="h-[94px] min-w-[164px] mb-2 ">
           <img
             src={video.thumbnails?.[0]?.url}
