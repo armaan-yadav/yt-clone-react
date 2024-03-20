@@ -9,13 +9,12 @@ const VideoCard = ({ video }) => {
       <Link to={`/video/${video?.videoId}`}>
         <div className="h-[60%] mb-2">
           <img
-            src={`${
-              mouseOver
+            src={`${mouseOver
                 ? video?.movingThumbnails?.[0]?.url
                 : video?.thumbnails[0]?.url
-            }`}
+              }`}
             alt="thumbnail"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover rounded-lg"
             onMouseEnter={() => setMouseOver(true)}
             onMouseLeave={() => setMouseOver(false)}
           />

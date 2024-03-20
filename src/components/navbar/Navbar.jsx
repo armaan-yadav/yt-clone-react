@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../context/contextApi";
-import { setVideos } from "../../utils/api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Navbar = () => {
   const [searchValue, setSearchValue] = useState("");
   const [showInput, setShowInput] = useState(false);
   const { setShowSideMenu } = useContext(Context);
+  const navigate = useNavigate()
 
   return (
-    <nav className="bg-black h-[56px] w-full  text-white">
+    <nav className="bg-black h-[56px] w-full  text-white fixed z-50 ">
       {showInput ? (
         <div className="h-full w-full bg-[#3F3F3F] flex items-center px-2">
           <svg
@@ -122,6 +122,7 @@ const Navbar = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              navigate(`/search/${searchValue}`)
             }}
             className="hidden md:flex"
           >

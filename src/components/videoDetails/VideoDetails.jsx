@@ -7,6 +7,8 @@ import VideoDescription from "./VideoDescription";
 import VideoAuthor from "./VideoAuthor";
 import VideoComments from "./videoComments/VideoCommentsContainer";
 import VideoSuggestionsContainer from "./videoSuggestions/VideoSuggestionsContainer";
+import LeftSidebarFull from "../sidebar/LeftSidebarFull";
+import VideoDetailsShimmer from "../shimmer/VideoDetailsShimmer";
 
 const VideoDetails = () => {
   const { id } = useParams();
@@ -14,16 +16,13 @@ const VideoDetails = () => {
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(true);
   const [videoDetails, setVideoDetails] = useState();
-  // const [isLoading, setIsLoading] = useState(false);
   const { isLoading, setIsLoading } = useContext(Context);
-  isLoading && console.log("first")
   useEffect(() => {
     setIsLoading(true);
-   
     getVideoDetails(id).then((response) => {
       setVideoDetails(response);
+      setIsLoading(false);
     });
-    setIsLoading(false);
     setTimeout(() => {
       setIsMuted(false);
       setIsPlaying(true);
@@ -31,24 +30,35 @@ const VideoDetails = () => {
   }, [id]);
 
   return !videoDetails ? (
-    <div>loading</div>
+    <VideoDetailsShimmer />
   ) : (
-    <div className="w-full bg-black text-white px-10 pt-7 flex gap-6">
-      <div className="main-video  max-w-[65%] min-w-[65%] h-full">
-        <VideoPlayer videoId={videoDetails.videoId} isPLaying={isPlaying} />
-        <h1 className="text-xl font-bold my-2">{videoDetails.title}</h1>
-        <div>
-          <VideoAuthor videoDetails={videoDetails} />
+    <>
+      <div className="w-full bg-black text-white lg:px-10 pt-[70px] flex gap-6  flex-col lg:flex-row ">
+        <div className="main-video  lg:max-w-[65%] lg:min-w-[65%] h-full">
+          <VideoPlayer videoId={videoDetails.videoId} isPLaying={isPlaying} />
+          <h1 className="text-xl font-bold my-2 px-1">{videoDetails.title}</h1>
+          <div className="px-1">
+            <VideoAuthor videoDetails={videoDetails} />
+          </div>
+          <VideoDescription
+            setShowFullDesc={setShowFullDesc}
+            showFullDesc={showFullDesc}
+            videoDetails={videoDetails}
+          />
+          {
+            window.innerWidth <= 480 &&
+            <VideoSuggestionsContainer videoId={videoDetails.videoId} />
+
+          }
+          <VideoComments videoId={videoDetails?.videoId} />
         </div>
-        <VideoDescription
-          setShowFullDesc={setShowFullDesc}
-          showFullDesc={showFullDesc}
-          videoDetails={videoDetails}
-        />
-        <VideoComments videoId={videoDetails.videoId} />
+        {
+          window.innerWidth > 480 &&
+          <VideoSuggestionsContainer videoId={videoDetails.videoId} />
+
+        }
       </div>
-      <VideoSuggestionsContainer videoId={videoDetails.videoId} />
-    </div>
+      <LeftSidebarFull /></>
   );
 };
 

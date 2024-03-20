@@ -6,7 +6,7 @@ import { Context } from "../../../context/contextApi";
 
 const VideoSuggestionsContainer = ({ videoId }) => {
   const { id } = useParams();
-  const [videoSuggestionsObj, setVideoSuggestionsObj] = useState({});
+  const [videoSuggestionsObj, getVideosuggestionsObj] = useState({});
   const [suggestedVideoList, setSuggestedVideosList] = useState([]);
   const [isLoadingLocal, setIsLoadingLocal] = useState(false);
   const { isLoading, setIsLoading } = useContext(Context);
@@ -14,19 +14,19 @@ const VideoSuggestionsContainer = ({ videoId }) => {
   useEffect(() => {
     setIsLoadingLocal(true);
     getSuggestedVideos(id).then((e) => {
-      setVideoSuggestionsObj(e);
+      getVideosuggestionsObj(e);
       setSuggestedVideosList(e.contents ? e.contents : []);
       setIsLoadingLocal(false);
     });
   }, []);
   return suggestedVideoList.length === 0 && isLoadingLocal ? (
-    <div>loading</div>
+    <div className=" max-sm:my-5">loading</div>
   ) : (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 max-sm:my-5">
       {suggestedVideoList.map((video, index) => (
         <VideoSuggestionCard
           video={video.video}
-          key={video.video.videoId ? video.video.videoId : index}
+          key={index}
         />
       ))}
     </div>

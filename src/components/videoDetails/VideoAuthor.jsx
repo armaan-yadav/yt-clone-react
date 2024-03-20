@@ -3,29 +3,31 @@ import { convertViews } from "../../utils/temp";
 
 const VideoAuthor = ({ videoDetails }) => {
   return (
-    <div className="flex items-center my-3">
-      <img src={videoDetails.author.avatar[0].url} className="rounded-full" />
-      <div className="mx-2">
-        <h3 className="font-semibold text-md flex items-center gap-1">
-          {videoDetails.author.title}
-          {videoDetails.author.badges.length !== 0 && (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="w-4 h-4"
-            >
-              <path
-                fillRule="evenodd"
-                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
-                clipRule="evenodd"
-              />
-            </svg>
-          )}
-        </h3>
-        <h3 className="text-sm text-slate-500">
-          {videoDetails.author.stats.subscribersText}
-        </h3>
+    <div className="flex items-center my-3 justify-between">
+
+      <div className="mx-2 flex gap-3">
+        <img src={videoDetails.author.avatar[0].url} className="rounded-full" />
+        <div>
+          <h3 className="font-semibold text-md flex items-center gap-1">
+            {videoDetails.author.title}
+            {videoDetails.author.badges.length !== 0 && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-4 h-4"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            )}
+          </h3>
+          <h3 className="text-sm text-slate-500">
+            {videoDetails.author.stats.subscribersText}
+          </h3></div>
       </div>
       <div className="flex bg-[#282828] py-1 px-2 rounded-xl gap-3 ">
         <div className="flex gap-2">
@@ -56,7 +58,7 @@ const VideoAuthor = ({ videoDetails }) => {
           Share
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

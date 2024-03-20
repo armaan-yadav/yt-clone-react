@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { setVideos } from "../utils/api";
+import { getVideos } from "../utils/api";
 
 export const Context = createContext();
 
@@ -8,10 +8,10 @@ export const AppContext = (props) => {
   const [searchResults, setSearchResults] = useState();
   const [category, setCategory] = useState("New");
   const [shoeSideMenu, setShowSideMenu] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("Home")
   useEffect(() => {
     setIsLoading(true);
-
-    setVideos(category)
+    getVideos(category)
       .then((response) => setSearchResults(response.contents))
       .then(() => {
         setIsLoading(false);
@@ -29,6 +29,8 @@ export const AppContext = (props) => {
         setCategory,
         shoeSideMenu,
         setShowSideMenu,
+        activeCategory,
+        setActiveCategory
       }}
     >
       {props.children}

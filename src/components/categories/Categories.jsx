@@ -7,14 +7,13 @@ const Categories = () => {
     useContext(Context);
 
   return (
-    <div className="w-[100%] h-[40px] bg-black fixed flex items-center gap-2 px-6">
+    <div className="w-[100%] h-[40px] bg-black flex items-center gap-2 lg:px-6">
       {categories.map((item, index) => (
         <button
-          className={`text-md  px-2 rounded-md text-nowrap ${
-            category == item
-              ? `text-[#3c3c3c] bg-white`
-              : `text-white bg-[#3c3c3c]`
-          }`}
+          className={`text-md  px-2 rounded-md text-nowrap ${category == item
+            ? `text-[#3c3c3c] bg-white`
+            : `text-white bg-[#3c3c3c]`
+            }`}
           key={index}
           onClick={() => {
             setIsLoading(true);

@@ -4,6 +4,7 @@ import { convertViews } from "../../../utils/temp";
 import { Context } from "../../../context/contextApi";
 const VideoSuggestionCard = ({ video }) => {
   const { setLoading } = useContext(Context);
+
   return (
     <div className=" h-[95px]  w-full sm:w-[370px] text-white ">
       <Link
@@ -15,7 +16,7 @@ const VideoSuggestionCard = ({ video }) => {
       >
         <div className="h-[94px] min-w-[164px] mb-2 ">
           <img
-            src={video.thumbnails?.[0]?.url}
+            src={video?.thumbnails?.[0]?.url}
             alt="thumbnail"
             className="h-full w-full object-cover rounded-md"
           />
@@ -23,9 +24,9 @@ const VideoSuggestionCard = ({ video }) => {
         <div className="flex gap-3 px-3">
           <div className="flex flex-col">
             <h1 className="font-semibold text-[.95rem]">
-              {video.title && video.title.length > 2
-                ? `${video.title?.toString().slice(0, 35)}...`
-                : video.title}
+              {video?.title?.length > 2
+                ? `${video?.title?.toString().slice(0, 35)}...`
+                : video?.title}
             </h1>
             <h4 className="text-[.8rem] text-gray-500 font-semibold">
               {video?.author?.title}

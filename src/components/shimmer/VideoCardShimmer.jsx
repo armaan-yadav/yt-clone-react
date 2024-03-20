@@ -2,7 +2,7 @@ import React from "react";
 
 const VideoCardShimmer = () => {
   return (
-    <div className=" h-[300px] w-[370px] ">
+    <div className=" h-[300px] w-[100%] ">
       <div className="h-[60%] mb-2">
         <div className="h-full w-full bg-slate-500 gradient-background"></div>
       </div>

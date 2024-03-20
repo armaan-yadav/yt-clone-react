@@ -1,16 +1,17 @@
 import React, { useContext } from "react";
 import { leftSidebarFullData } from "../../utils/data";
 import { Context } from "../../context/contextApi";
+import { useNavigate } from "react-router-dom";
+import { NavItem } from "react-bootstrap";
 
-const LeftSidebarFull = ({ activeCategory, setActiveCategory }) => {
-  const { shoeSideMenu, setShowSideMenu, category, setCategory } =
+const LeftSidebarFull = () => {
+  const { shoeSideMenu, setShowSideMenu, setCategory, activeCategory, setActiveCategory, } =
     useContext(Context);
-
+  const navigate = useNavigate()
   return (
     <div
-      className={`w-[170px] h-[100vh] bg-black text-white flex flex-col gap-5 items-center justify-start absolute top-0 duration-300 ease-in-out z-50 ${
-        shoeSideMenu ? `left-0 ` : `left-[-100%]`
-      }`}
+      className={`w-[170px] h-[100vh] bg-black text-white flex flex-col gap-5 items-center justify-start absolute top-0 duration-300 ease-in-out z-50 ${shoeSideMenu ? `left-0 ` : `left-[-100%]`
+        }`}
     >
       <div className="flex items-center gap-3 h-[50px]">
         <svg
@@ -69,13 +70,14 @@ const LeftSidebarFull = ({ activeCategory, setActiveCategory }) => {
       </div>
       {leftSidebarFullData.map((item) => (
         <div
-          className={`w-full text-[1.2rem] flex flex-row items-center gap-3 px-2 pb-1 hover:border-b-2 border-[rgba(255,255,255,0.59)] duration-200 ${
-            activeCategory == item.name && `text-black bg-white`
-          }`}
+          className={`w-full text-[1.2rem] flex flex-row items-center gap-3 px-2 pb-1 hover:border-b-2 border-[rgba(255,255,255,0.59)] duration-200 ${activeCategory == item.name && `text-black bg-white`
+            }`}
           key={item.name}
           onClick={() => {
             setCategory(item.name);
             setActiveCategory(item.name);
+            navigate("/")
+            setShowSideMenu(false)
           }}
         >
           <svg

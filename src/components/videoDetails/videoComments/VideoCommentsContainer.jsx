@@ -26,7 +26,7 @@ export const VideoCommentsContainer = ({ videoId }) => {
     const handleScroll = async () => {
       if (
         window.innerHeight + document.documentElement.scrollTop >=
-          document.documentElement.offsetHeight - 1 &&
+        document.documentElement.offsetHeight - 1 &&
         !isLoadingMore
       ) {
         setIsLoadingMore(true);
@@ -45,13 +45,13 @@ export const VideoCommentsContainer = ({ videoId }) => {
   }, [isLoadingMore, cursorNext]);
 
   return commentsList.length === 0 && isLoading ? (
-    <div className="w-full flex  justify-center ">
+    <div className="w-full flex  justify-center  ">
       <img src={loading} alt="" className="h-[50px]" />
     </div>
   ) : videoCommentsObj.error ? (
-    <div>comments are turned off</div>
+    <div className="px-2 ">comments are turned off</div>
   ) : (
-    <div className="w-full my-3 overflow-auto">
+    <div className="w-full my-3 overflow-auto max-sm:px-2 ">
       <h1 className="text-xl font-semibold">
         {videoCommentsObj?.totalCommentsCount} comments
       </h1>
