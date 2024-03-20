@@ -12,7 +12,7 @@ export const AppContext = (props) => {
   useEffect(() => {
     setIsLoading(true);
     getVideos(category)
-      .then((response) => setSearchResults(response.contents))
+      .then((response) => setSearchResults(response))
       .then(() => {
         setIsLoading(false);
       });

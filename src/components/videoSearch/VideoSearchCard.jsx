@@ -5,9 +5,9 @@ import { convertViews } from '../../utils/temp'
 const VideoSearchCard = ({ video }) => {
 
     return (
-        <div className="h-[210px]   w-[100%] text-white  flex flex-col ">
-            <Link to={`/video/${video?.videoId}`} className='flex  gap-4'>
-                <div className="lg:max-w-[360px] lg:min-w-[360px] lg:h-[100%] mb-2 ">
+        <div className="lg:h-[210px]   w-[100%] text-white  flex flex-col ">
+            <Link to={`/video/${video?.videoId}`} className='flex  gap-1 lg:gap-4 flex-col lg:flex-row'>
+                <div className="h-[230px] w-full lg:max-w-[360px] lg:min-w-[360px] lg:h-[100%] mb-2 ">
                     <img
                         src={video.thumbnails?.[0].url}
                         alt="thumbnail"
@@ -15,8 +15,8 @@ const VideoSearchCard = ({ video }) => {
 
                     />
                 </div>
-                <div className='flex flex-col gap-2.5 text-[#aaa]'>
-                    <h1 className="font-semibold text-lg text-white">
+                <div className='flex flex-col gap-2.5 text-[#aaa] max-sm:px-3 '>
+                    <h1 className="lg:font-semibold  text-xl lg:text-lg text-white">
                         {" "}
                         {video?.title && video.title.length > 90
                             ? `${video.title?.toString().slice(0, 60)}...`
@@ -45,7 +45,7 @@ const VideoSearchCard = ({ video }) => {
                             {video?.author?.title}
                         </h4>
                     </div>
-                    <p className='text-sm w-full '>{video?.descriptionSnippet}</p>
+                    <p className='text-sm w-full hidden lg:block'>{video?.descriptionSnippet}</p>
                 </div>
             </Link >
         </div >

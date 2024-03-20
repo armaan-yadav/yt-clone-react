@@ -6,7 +6,6 @@ const Navbar = () => {
   const [showInput, setShowInput] = useState(false);
   const { setShowSideMenu } = useContext(Context);
   const navigate = useNavigate()
-
   return (
     <nav className="bg-black h-[56px] w-full  text-white fixed z-50 ">
       {showInput ? (
@@ -29,6 +28,7 @@ const Navbar = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              navigate(`/search/${searchValue}`)
             }}
             className="flex-1 flex ]"
           >

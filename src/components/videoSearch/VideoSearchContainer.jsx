@@ -10,7 +10,7 @@ const VideoSearchContainer = () => {
     const [cursorNext, setCursorNext] = useState("_")
     const [isLoading, setIsLoading] = useState(false)
     const [isLoadingMore, setIsLoadingMore] = useState(false)
-    console.log(searchResultsList)
+
     useEffect(() => {
         setIsLoading(true)
         setSearchResultsList([])
@@ -48,7 +48,7 @@ const VideoSearchContainer = () => {
         <div className='bg-black w-full text-white flex justify-center items-center'>Searchinggggggg</div>
         : (
             <div className=' text-white h-full lg:pl-[70px] w-full pt-[70px]'>
-                <h1> Search Results for :  <span className='text-3xl'>{searchValue}</span></h1>
+                <h1 className='mb-3'> Search Results for :  <span className='text-3xl'>{searchValue}</span></h1>
                 <div className="bg-black flex flex-col gap-3 h-full">
                     {searchResultsList?.map((item, index) => {
                         return item.type == 'video' && <VideoSearchCard video={item.video} key={index} />
